@@ -1,0 +1,20 @@
+{{/* 札记：短笔记列表，直接显示全文，按时间倒序 */}}
+{{ define "main" }}
+<header class="page-head">
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+  {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+</header>
+
+<section class="note-list">
+  {{ range .RegularPages.ByDate.Reverse }}
+  <article class="note">
+    <div class="note-body">{{ .Content }}</div>
+    <a class="note-date" href="{{ .RelPermalink }}">{{ .Date.Format "2006-01-02 15:04" }}</a>
+    {{ with .Params.tags }}<span class="note-tags">{{ range . }}#{{ . }} {{ end }}</span>{{ end }}
+  </article>
+  {{ else }}
+  <p class="empty">还没有札记。</p>
+  {{ end }}
+</section>
+{{ end }}

@@ -1,0 +1,19 @@
+{{ define "main" }}
+<header class="page-head">
+  <h1>{{ .Title }}</h1>
+</header>
+<link href="{{ "pagefind/pagefind-ui.css" | relURL }}" rel="stylesheet">
+<div id="search"></div>
+<noscript><p>搜索需要启用 JavaScript。</p></noscript>
+<script src="{{ "pagefind/pagefind-ui.js" | relURL }}"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', function () {
+    if (typeof PagefindUI === 'undefined') {
+      document.getElementById('search').innerHTML = '<p class="empty">搜索索引在部署构建时生成，本地 <code>hugo server</code> 预览时不可用。</p>';
+      return;
+    }
+    new PagefindUI({ element: '#search', showSubResults: true, showImages: false,
+      translations: { placeholder: '搜索文章…', clear_search: '清除', zero_results: '没有找到「[SEARCH_TERM]」', many_results: '[COUNT] 条结果', one_result: '[COUNT] 条结果' } });
+  });
+</script>
+{{ end }}

@@ -1,0 +1,82 @@
+baseURL = "https://cs2100.github.io/siwen-bailei/"   # 上线后改成你的域名或 Pages 地址
+locale = "zh-CN"
+defaultContentLanguage = "zh-cn"
+hasCJKLanguage = true          # 中文字数统计、摘要必须开
+title = "思文败类"
+copyright = "思文败类"
+enableRobotsTXT = true
+summaryLength = 70
+
+[params]
+  description = "随笔、散文、时评、文学批评与小说。"
+  author = "思文败类"
+  email = "cs2100@hotmail.com"          # 改成你的邮箱，留空则不显示
+  since = 2026
+  # 参与"全部 / 最近 / 精选 / RSS"的栏目（对应 content 下的目录名）
+  postSections = ["manbi", "shuhua", "wenku", "zhaji"]
+  recentCount = 8                    # 首页"最近"显示几篇
+  favoriteCount = 4                  # 首页"精选"显示几篇（文章写 favorite: true）
+
+  # 评论：默认关闭。要开启请到 https://giscus.app 生成参数后填入
+  [params.giscus]
+    enabled = false
+    repo = "yourname/siwen-bailei"
+    repoId = ""
+    category = "Announcements"
+    categoryId = ""
+
+[taxonomies]
+  tag = "tags"
+
+[markup]
+  [markup.goldmark.parser]
+    wrapStandAloneImageWithinParagraph = false   # 让单独成行的图片渲染成 <figure>
+  [markup.goldmark.renderer]
+    unsafe = true                    # 允许在 Markdown 里写少量 HTML
+  [markup.goldmark.extensions]
+    [markup.goldmark.extensions.typographer]
+      disable = true                 # 中文里不要自动弯引号
+
+[outputs]
+  home = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+
+[services.rss]
+  limit = 50
+
+# ---------- 顶部导航（pageRef 对应 content 下的目录或页面）----------
+# 栏目入口显示在首页的"栏目"卡片里，顶部只放常用页面
+[[menus.main]]
+  name = "精选"
+  pageRef = "/essentials"
+  weight = 10
+[[menus.main]]
+  name = "全部"
+  pageRef = "/archive"
+  weight = 20
+[[menus.main]]
+  name = "札记"
+  pageRef = "/zhaji"
+  weight = 30
+[[menus.main]]
+  name = "关于"
+  pageRef = "/about"
+  weight = 40
+[[menus.main]]
+  name = "搜索"
+  pageRef = "/search"
+  weight = 50
+
+# ---------- 页脚 ----------
+[[menus.footer]]
+  name = "友链"
+  pageRef = "/links"
+  weight = 10
+[[menus.footer]]
+  name = "标签"
+  pageRef = "/tags"
+  weight = 20
+[[menus.footer]]
+  name = "RSS"
+  url = "/index.xml"
+  weight = 30

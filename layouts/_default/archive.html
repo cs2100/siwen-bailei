@@ -1,0 +1,13 @@
+{{ define "main" }}
+<header class="page-head">
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+</header>
+{{ $all := where site.RegularPages "Section" "in" site.Params.postSections }}
+{{ range ($all.ByDate.Reverse).GroupByDate "2006" }}
+  <section class="year">
+    <h2 class="year-title">{{ .Key }} <small>{{ len .Pages }} 篇</small></h2>
+    {{ partial "postlist.html" .Pages }}
+  </section>
+{{ end }}
+{{ end }}

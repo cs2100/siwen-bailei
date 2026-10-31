@@ -1,0 +1,8 @@
+{{/* 返回页面的封面图资源（找不到则返回 false）。参数：dict "page" 页面
+     封面图放在文章同一文件夹里，front matter 写 cover: "cover.jpg" */}}
+{{ $p := .page }}
+{{ $r := false }}
+{{ with $p.Params.cover }}
+  {{ $r = $p.Resources.GetMatch . }}
+{{ end }}
+{{ return $r }}

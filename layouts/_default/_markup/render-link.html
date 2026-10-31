@@ -1,0 +1,4 @@
+{{- /* 以 / 开头的站内链接自动补上站点子路径（项目页部署时必需） */ -}}
+{{- $d := .Destination -}}
+{{- if and (strings.HasPrefix $d "/") (not (strings.HasPrefix $d "//")) }}{{ $d = strings.TrimPrefix "/" $d | relURL }}{{ end -}}
+<a href="{{ $d | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }} target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>

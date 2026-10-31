@@ -1,0 +1,65 @@
+{{ define "main" }}
+{{ $all := where site.RegularPages "Section" "in" site.Params.postSections }}
+
+<section class="hero">
+  <h1>{{ .Params.heading | default site.Title }}</h1>
+  <div class="intro">{{ .Content }}</div>
+</section>
+
+<section class="block">
+  <h2 class="block-title">栏目</h2>
+  <ul class="sections">
+    {{ range site.Params.postSections }}
+      {{ with site.GetPage (printf "/%s" .) }}
+      <li>
+        <a href="{{ .RelPermalink }}">
+          <span class="sec-name">{{ .Title }}</span>
+          <span class="sec-desc">{{ .Description }}</span>
+          <span class="sec-count">{{ len .RegularPagesRecursive }} 篇</span>
+        </a>
+      </li>
+      {{ end }}
+    {{ end }}
+  </ul>
+</section>
+
+<section class="block">
+  <h2 class="block-title">最近 <a class="more" href="{{ "archive/" | relURL }}">全部 →</a></h2>
+  {{ if $all }}
+    {{/* 按上传日期（lastmod，没写则为 date）倒序，旧文新传上来也会出现在这里 */}}
+    <ul class="postlist">
+      {{ range first site.Params.recentCount $all.ByLastmod.Reverse }}
+      <li>
+        <time datetime="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format "01-02" }}</time>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ with .Parent }}{{ if .IsSection }}<span class="chip">{{ .Title }}</span>{{ end }}{{ end }}
+      </li>
+      {{ end }}
+    </ul>
+  {{ else }}
+    <p class="empty">还没有文章。</p>
+  {{ end }}
+</section>
+
+{{ $favs := where $all "Params.favorite" true }}
+{{ if $favs }}
+<section class="block">
+  <h2 class="block-title">精选 <a class="more" href="{{ "essentials/" | relURL }}">更多 →</a></h2>
+  <ul class="fav-grid n{{ site.Params.favoriteCount }}">
+    {{ range first site.Params.favoriteCount $favs.ByDate.Reverse }}{{ partial "favcard.html" . }}{{ end }}
+  </ul>
+</section>
+{{ end }}
+{{ $notes := where site.RegularPages "Section" "zhaji" }}
+{{ if $notes }}
+<section class="block">
+  <h2 class="block-title">札记 <a class="more" href="{{ "zhaji/" | relURL }}">更多 →</a></h2>
+  {{ range first 2 $notes.ByDate.Reverse }}
+  <article class="note">
+    <div class="note-body">{{ .Content }}</div>
+    <a class="note-date" href="{{ .RelPermalink }}">{{ .Date.Format "2006-01-02" }}</a>
+  </article>
+  {{ end }}
+</section>
+{{ end }}
+{{ end }}

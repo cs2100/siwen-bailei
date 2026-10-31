@@ -1,0 +1,33 @@
+{{/* 书架：用于"文集"和"小说"栏目首页。下面每个子文件夹是一部书，直接放在本栏目下的文章视为单篇作品（如短篇）。 */}}
+{{ define "main" }}
+<header class="page-head">
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+  {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+</header>
+
+{{ $groups := .Params.groups | default slice }}
+{{ $books := .Sections }}
+{{ range $groups }}
+  {{ $g := . }}
+  {{ $items := where $books "Params.form" $g }}
+  {{ if $items }}
+  <section class="shelf-group">
+    {{ if or (gt (len $groups) 1) (ne $g $.Title) }}<h2 class="block-title">{{ $g }}</h2>{{ end }}
+    {{ partial "bookcards.html" ($items.ByWeight) }}
+  </section>
+  {{ end }}
+{{ end }}
+
+{{ $singles := .RegularPages }}
+{{ if $singles }}
+<section class="shelf-group">
+  <h2 class="block-title">{{ .Params.single_title | default "单篇" }}</h2>
+  {{ partial "postlist.html" $singles.ByDate.Reverse }}
+</section>
+{{ end }}
+
+{{ if not (or $books $singles) }}
+<p class="empty">这里还没有内容。</p>
+{{ end }}
+{{ end }}

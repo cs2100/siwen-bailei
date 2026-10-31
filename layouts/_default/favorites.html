@@ -1,0 +1,14 @@
+{{ define "main" }}
+<header class="page-head">
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+</header>
+{{ $all := where site.RegularPages "Section" "in" site.Params.postSections }}
+{{ $favs := where $all "Params.favorite" true }}
+<ul class="fav-grid">
+  {{ range $favs.ByDate.Reverse }}{{ partial "favcard.html" . }}
+  {{ else }}
+  <li class="empty">还没有精选。在文章的 front matter 里写 <code>favorite: true</code> 即可。</li>
+  {{ end }}
+</ul>
+{{ end }}

@@ -1,0 +1,18 @@
+{{/* 上一篇/下一篇。参数：dict "page" 当前页 "list" 按阅读顺序排好的页面列表 "unit" 量词（篇/章） */}}
+{{ $page := .page }}
+{{ $list := .list }}
+{{ $unit := .unit | default "篇" }}
+{{ $prev := false }}
+{{ $next := false }}
+{{ range $i, $p := $list }}
+  {{ if eq $p.RelPermalink $page.RelPermalink }}
+    {{ if gt $i 0 }}{{ $prev = index $list (sub $i 1) }}{{ end }}
+    {{ if lt (add $i 1) (len $list) }}{{ $next = index $list (add $i 1) }}{{ end }}
+  {{ end }}
+{{ end }}
+{{ if or $prev $next }}
+<nav class="pager" aria-label="上一{{ $unit }}和下一{{ $unit }}">
+  {{ with $prev }}<a class="prev" href="{{ .RelPermalink }}"><small>上一{{ $unit }}</small>{{ .Title }}</a>{{ end }}
+  {{ with $next }}<a class="next" href="{{ .RelPermalink }}"><small>下一{{ $unit }}</small>{{ .Title }}</a>{{ end }}
+</nav>
+{{ end }}

@@ -1,0 +1,32 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{- $desc := cond (ne .Description "") .Description site.Params.description }}
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} · {{ site.Title }}{{ end }}</title>
+<meta name="description" content="{{ $desc }}">
+<meta name="author" content="{{ site.Params.author }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ site.Title }}">
+<meta property="og:locale" content="zh_CN">
+{{- with partial "cover.html" (dict "page" .) }}
+{{- $og := .Fill "1200x630 q85" }}
+<meta property="og:image" content="{{ $og.Permalink }}">
+<meta name="twitter:card" content="summary_large_image">
+{{- end }}
+<meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1917" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+{{ range .AlternativeOutputFormats -}}
+<link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}">
+{{ end -}}
+<script>
+  // 在样式加载前设置主题，避免闪烁
+  try { var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+  // 已选正体：先隐藏页面，等转换完成再显示，避免先闪一下简体（4 秒后无论如何显示）
+  try { if (localStorage.getItem('lang') === 'hant') { var h = document.documentElement; h.classList.add('zh-wait'); h.lang = 'zh-TW'; setTimeout(function () { h.classList.remove('zh-wait'); }, 4000); } } catch (e) {}
+</script>
+{{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">

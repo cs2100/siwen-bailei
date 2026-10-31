@@ -1,0 +1,50 @@
+{{ define "main" }}
+{{ $parent := .Parent }}
+{{/* 属于四个内容栏目的是"文章"，其余（关于、此刻、友链）是普通页面 */}}
+{{ $isPost := in site.Params.postSections .Section }}
+<article class="post"{{ if $isPost }} data-pagefind-body{{ end }}>
+  <header class="post-head">
+    <h1 data-pagefind-meta="title">{{ .Title }}</h1>
+    {{ if $isPost }}<p class="meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006 年 1 月 2 日" }}</time>
+      {{ if and $parent $parent.IsSection }}
+        {{ $top := $parent.Parent }}
+        {{ if and $top $top.IsSection }}· <a href="{{ $top.RelPermalink }}">{{ $top.Title }}</a> ›{{ else }}·{{ end }}
+        <a href="{{ $parent.RelPermalink }}">{{ $parent.Title }}</a>
+      {{ end }}
+      · {{ .WordCount }} 字
+    </p>{{ end }}
+  </header>
+
+  {{ with partial "cover.html" (dict "page" .) }}
+    {{/* 默认按原图完整比例显示（不裁剪）。想裁成 16:9 横幅：cover_fit: "crop"，并可用 cover_pos 指定保留哪一部分（Top/Bottom/Left/Right/Center，默认智能） */}}
+    {{ $hero := "" }}
+    {{ if ne $.Params.cover_fit "crop" }}
+      {{ $hero = cond (gt .Width 1400) (.Resize "1400x q85") . }}
+    {{ else }}
+      {{ $hero = .Fill (printf "1400x788 q85 %s" ($.Params.cover_pos | default "Smart")) }}
+    {{ end }}
+    <figure class="hero-img">
+      <img src="{{ $hero.RelPermalink }}" width="{{ $hero.Width }}" height="{{ $hero.Height }}" alt="{{ $.Params.cover_alt | default $.Title }}" decoding="async">
+      {{ with $.Params.cover_caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+    </figure>
+  {{ end }}
+
+  {{ with .Params.disclaimer }}<p class="disclaimer">{{ . }}</p>{{ end }}
+
+  <div class="prose">{{ .Content }}</div>
+
+  {{ if $isPost }}{{ with .Params.tags }}
+  <p class="tags">{{ range . }}<a href="{{ printf "tags/%s/" (. | urlize) | relURL }}">#{{ . }}</a>{{ end }}</p>
+  {{ end }}
+
+  {{ end }}
+
+  {{ if and $isPost $parent $parent.IsSection }}
+    {{ $list := cond ($parent.Params.ordered | default false) $parent.RegularPages.ByWeight $parent.RegularPages.ByDate }}
+    {{ partial "pager.html" (dict "page" . "list" $list "unit" ($parent.Params.unit | default "篇")) }}
+  {{ end }}
+
+  {{ partial "comments.html" . }}
+</article>
+{{ end }}

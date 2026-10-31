@@ -1,0 +1,42 @@
+{{/* 一部书（文集或小说）的封面与目录页。章节放在本文件夹里，用 weight 决定顺序。 */}}
+{{ define "main" }}
+{{ $n := 0 }}{{ $w := 0 }}
+{{ range .RegularPages }}{{ $n = add $n 1 }}{{ $w = add $w .WordCount }}{{ end }}
+{{ $unit := .Params.unit | default "篇" }}
+
+<header class="book-head">
+  {{ with partial "cover.html" (dict "page" .) }}
+    {{ $img := .Fill "480x672 q85" }}
+    <div class="book-cover big"><img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="《{{ $.Title }}》封面" decoding="async"></div>
+  {{ end }}
+  <div class="book-meta">
+    <h1>{{ .Title }}</h1>
+    {{ with .Params.subtitle }}<p class="subtitle">{{ . }}</p>{{ end }}
+    <p class="meta">
+      {{ with .Params.status }}<span class="chip">{{ . }}</span>{{ end }}
+      {{ with .Params.form }}{{ . }} · {{ end }}已收录 {{ $n }} {{ $unit }}{{ if gt $w 0 }} · 约 {{ if ge $w 10000 }}{{ div (float $w) 10000 | lang.FormatNumber 1 }} 万{{ else }}{{ $w }}{{ end }}字{{ end }}
+    </p>
+    {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+    {{ with $.Parent }}<p class="meta"><a href="{{ .RelPermalink }}">← 返回{{ .Title }}</a></p>{{ end }}
+  </div>
+</header>
+
+{{ with .Content }}<div class="prose book-intro">{{ . }}</div>{{ end }}
+
+<section class="block">
+  <h2 class="block-title">目录</h2>
+  {{ if .RegularPages }}
+  <ol class="toc{{ if .Params.numbered }} numbered{{ end }}">
+    {{ range .RegularPages.ByWeight }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+      {{ with .Description }}<span class="desc">{{ . }}</span>{{ end }}
+    </li>
+    {{ end }}
+  </ol>
+  {{ else }}
+  <p class="empty">还没有收录文章，陆续整理中。</p>
+  {{ end }}
+</section>
+{{ end }}

@@ -1,0 +1,20 @@
+{{- /* 正文插图：![替代文字](pic.jpg "图注")。图片放在文章同一文件夹里。 */ -}}
+{{- $dest := .Destination -}}
+{{- $cap := .Title | default .Text -}}
+{{- $img := false -}}
+{{- if not (or (strings.HasPrefix $dest "http") (strings.HasPrefix $dest "/")) -}}
+  {{- $img = .PageInner.Resources.Get $dest -}}
+{{- end -}}
+<figure class="figure">
+  {{- if $img -}}
+    {{- if and (in (slice "jpeg" "png" "webp") $img.MediaType.SubType) (gt $img.Width 1400) -}}
+      {{- $img = $img.Resize "1400x q85" -}}
+    {{- end -}}
+    <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="{{ .Text }}" loading="lazy" decoding="async">
+  {{- else -}}
+    {{- $src := $dest -}}
+    {{- if and (strings.HasPrefix $src "/") (not (strings.HasPrefix $src "//")) }}{{ $src = strings.TrimPrefix "/" $src | relURL }}{{ end -}}
+    <img src="{{ $src | safeURL }}" alt="{{ .Text }}" loading="lazy" decoding="async">
+  {{- end -}}
+  {{- with $cap }}<figcaption>{{ . }}</figcaption>{{ end -}}
+</figure>

@@ -1,0 +1,28 @@
+{{/* 书籍卡片列表。参数：书（章节页）列表 */}}
+<ul class="books">
+  {{ range . }}
+  {{ $n := 0 }}{{ $w := 0 }}
+  {{ range .RegularPages }}{{ $n = add $n 1 }}{{ $w = add $w .WordCount }}{{ end }}
+  <li>
+    <a class="book-card" href="{{ .RelPermalink }}">
+      <span class="book-cover">
+        {{ with partial "cover.html" (dict "page" .) }}
+          {{ $img := .Fill "360x504 q85" }}
+          <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="" loading="lazy">
+        {{ else }}
+          <span class="book-ph">{{ .Title }}</span>
+        {{ end }}
+      </span>
+      <span class="book-info">
+        <strong>{{ .Title }}</strong>
+        {{ with .Params.subtitle }}<em>{{ . }}</em>{{ end }}
+        {{ with .Description }}<span class="book-desc">{{ . }}</span>{{ end }}
+        <span class="book-stat">
+          {{ with .Params.status }}<span class="chip">{{ . }}</span>{{ end }}
+          已收录 {{ $n }} {{ .Params.unit | default "篇" }}{{ if gt $w 0 }} · 约 {{ if ge $w 10000 }}{{ div (float $w) 10000 | lang.FormatNumber 1 }} 万{{ else }}{{ $w }}{{ end }}字{{ end }}
+        </span>
+      </span>
+    </a>
+  </li>
+  {{ end }}
+</ul>

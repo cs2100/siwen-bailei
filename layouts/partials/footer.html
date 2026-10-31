@@ -1,0 +1,9 @@
+<footer class="site-footer">
+  <div class="wrap">
+    <nav class="foot-nav" aria-label="页脚导航">
+      {{ range site.Menus.footer }}<a href="{{ .URL }}">{{ .Name }}</a>{{ end }}
+      {{ with site.Params.email }}<a href="mailto:{{ . }}">写信给我</a>{{ end }}
+    </nav>
+    <p class="copy">© {{ site.Params.since }}{{ if ne (now.Year) site.Params.since }}–{{ now.Year }}{{ end }} {{ site.Title }}</p>
+  </div>
+</footer>

@@ -1,0 +1,13 @@
+{{/* 精选卡片：有封面按原图比例显示封面，没有则显示标题首字的纸色占位。参数：页面本身 */}}
+<li class="fav">
+  <a href="{{ .RelPermalink }}">
+    {{ with partial "cover.html" (dict "page" .) }}
+      {{ $t := .Resize "640x q80" }}
+      <img src="{{ $t.RelPermalink }}" width="{{ $t.Width }}" height="{{ $t.Height }}" alt="" loading="lazy" decoding="async">
+    {{ else }}
+      <span class="fav-ph" aria-hidden="true">{{ substr .Title 0 1 }}</span>
+    {{ end }}
+    <span class="fav-title">{{ .Title }}</span>
+    {{ with .Description }}<span class="fav-desc">{{ . }}</span>{{ end }}
+  </a>
+</li>
