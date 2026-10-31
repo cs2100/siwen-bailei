@@ -121,6 +121,16 @@ disclaimer: "本篇为私小说：取材于个人经验，细节经过改写，�
 - 某段文字不想被转换，用 `<span class="ignore-opencc">……</span>` 包起来。
 - 搜索页用的是简体索引，输入繁体关键词搜不到，请用简体搜索。
 
+## 网页后台（写文章不用碰文件）
+
+网址 `https://cs2100.github.io/siwen-bailei/admin/`。后台程序是 Sveltia CMS，放在 `static/admin/` 里（`sveltia-cms.js` 及 `chunks/`、`locales/`，不用改），配置文件是 `static/admin/config.yml`。
+
+- 登录：点"使用访问令牌登录"，粘贴 GitHub 的 fine-grained 令牌（只授权 `siwen-bailei` 仓库，权限 Contents: Read and write）。令牌别发给任何人。
+- 在后台点"发布"，等于向仓库提交了一次，网站一两分钟后自动更新。
+- 之后想在本机继续用 VS Code / GitHub Desktop 改文件，要先在 GitHub Desktop 点 **Fetch origin → Pull**，免得和后台的改动冲突。
+- 新增文集：在 `config.yml` 里复制 `qingchun` 那一段，改 `name`、`label`、`folder`。
+- 为了不依赖境外网络，`sveltia-cms.js` 里把中文翻译包的地址改成了本站的 `locales/`（升级后台程序时需要重做这一处）。
+
 ## 其他
 
 - 配色与字体：`assets/css/main.css` 顶部的变量。

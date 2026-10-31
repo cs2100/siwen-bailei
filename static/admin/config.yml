@@ -1,0 +1,162 @@
+# 思文败类 · 后台配置（Sveltia CMS）
+# 登录：打开 /admin/，选“使用令牌登录”，粘贴 GitHub 访问令牌。
+backend:
+  name: github
+  repo: cs2100/siwen-bailei
+  branch: main
+
+site_url: https://cs2100.github.io/siwen-bailei/
+display_url: https://cs2100.github.io/siwen-bailei/
+show_preview_links: true
+publish_mode: simple
+
+# 不属于某篇文章的图片（比如替换站点图标）放这里
+media_folder: static/uploads
+public_folder: /uploads
+
+collections:
+  - name: manbi
+    label: 茑萝漫笔
+    label_singular: 文章
+    description: "随笔、散文、博文、时评"
+    folder: content/manbi
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    slug: {template: "{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}", editable: true}
+    sortable_fields: [lastmod, date, title]
+    summary: "{{title}}"
+    fields:
+      - {label: 标题, name: title, widget: string}
+      - {label: 写作日期, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "文章原本的写作日期；整理旧文时填当年的日期"}
+      - {label: 上传日期, name: lastmod, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "今天的日期；首页“最近”按它排序"}
+      - {label: 一句话摘要, name: description, widget: string, required: false, hint: "显示在目录、精选卡片和分享卡片上，写一行即可"}
+      - {label: 标签, name: tags, widget: list, required: false}
+      - {label: 加入首页精选, name: favorite, widget: boolean, default: false}
+      - {label: 封面图, name: cover, widget: image, required: false, hint: "精选卡片和文章顶部用它。不要与正文里的插图重复"}
+      - {label: 封面图说明, name: cover_alt, widget: string, required: false}
+      - {label: 封面图注, name: cover_caption, widget: string, required: false}
+      - {label: 声明（私小说等）, name: disclaimer, widget: string, required: false, hint: "显示在标题下方的一行小字"}
+      - {label: 草稿, name: draft, widget: boolean, default: false, hint: "打开则不会在网站上显示"}
+      - {label: 正文, name: body, widget: markdown, hint: "段落之间会自动空行，不用手动处理"}
+  - name: shuhua
+    label: 知也书话
+    label_singular: 文章
+    description: "文学批评与读书笔记"
+    folder: content/shuhua
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    slug: {template: "{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}", editable: true}
+    sortable_fields: [lastmod, date, title]
+    summary: "{{title}}"
+    fields:
+      - {label: 标题, name: title, widget: string}
+      - {label: 写作日期, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "文章原本的写作日期；整理旧文时填当年的日期"}
+      - {label: 上传日期, name: lastmod, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "今天的日期；首页“最近”按它排序"}
+      - {label: 一句话摘要, name: description, widget: string, required: false, hint: "显示在目录、精选卡片和分享卡片上，写一行即可"}
+      - {label: 标签, name: tags, widget: list, required: false}
+      - {label: 加入首页精选, name: favorite, widget: boolean, default: false}
+      - {label: 封面图, name: cover, widget: image, required: false, hint: "精选卡片和文章顶部用它。不要与正文里的插图重复"}
+      - {label: 封面图说明, name: cover_alt, widget: string, required: false}
+      - {label: 封面图注, name: cover_caption, widget: string, required: false}
+      - {label: 声明（私小说等）, name: disclaimer, widget: string, required: false, hint: "显示在标题下方的一行小字"}
+      - {label: 草稿, name: draft, widget: boolean, default: false, hint: "打开则不会在网站上显示"}
+      - {label: 正文, name: body, widget: markdown, hint: "段落之间会自动空行，不用手动处理"}
+  - name: qingchun
+    label: 文库 · 青春残像
+    label_singular: 文章
+    description: "文集《青春残像》里的文章"
+    folder: content/wenku/qingchun-canxiang
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    slug: {template: "{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}", editable: true}
+    sortable_fields: [lastmod, date, title]
+    summary: "{{title}}"
+    fields:
+      - {label: 标题, name: title, widget: string}
+      - {label: 写作日期, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "文章原本的写作日期；整理旧文时填当年的日期"}
+      - {label: 上传日期, name: lastmod, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "今天的日期；首页“最近”按它排序"}
+      - {label: 本书中的顺序, name: weight, widget: number, value_type: int, min: 1, hint: "数字小的排前面。建议隔十留空：10、20、30，以后插入文章不用重排"}
+      - {label: 一句话摘要, name: description, widget: string, required: false, hint: "显示在目录、精选卡片和分享卡片上，写一行即可"}
+      - {label: 标签, name: tags, widget: list, required: false}
+      - {label: 加入首页精选, name: favorite, widget: boolean, default: false}
+      - {label: 封面图, name: cover, widget: image, required: false, hint: "精选卡片和文章顶部用它。不要与正文里的插图重复"}
+      - {label: 封面图说明, name: cover_alt, widget: string, required: false}
+      - {label: 封面图注, name: cover_caption, widget: string, required: false}
+      - {label: 声明（私小说等）, name: disclaimer, widget: string, required: false, hint: "显示在标题下方的一行小字"}
+      - {label: 草稿, name: draft, widget: boolean, default: false, hint: "打开则不会在网站上显示"}
+      - {label: 正文, name: body, widget: markdown, hint: "段落之间会自动空行，不用手动处理"}
+  - name: qinggui
+    label: 文库 · 情归何处
+    label_singular: 文章
+    description: "文集《情归何处》里的文章"
+    folder: content/wenku/qinggui-hechu
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    slug: {template: "{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}", editable: true}
+    sortable_fields: [lastmod, date, title]
+    summary: "{{title}}"
+    fields:
+      - {label: 标题, name: title, widget: string}
+      - {label: 写作日期, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "文章原本的写作日期；整理旧文时填当年的日期"}
+      - {label: 上传日期, name: lastmod, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "今天的日期；首页“最近”按它排序"}
+      - {label: 本书中的顺序, name: weight, widget: number, value_type: int, min: 1, hint: "数字小的排前面。建议隔十留空：10、20、30，以后插入文章不用重排"}
+      - {label: 一句话摘要, name: description, widget: string, required: false, hint: "显示在目录、精选卡片和分享卡片上，写一行即可"}
+      - {label: 标签, name: tags, widget: list, required: false}
+      - {label: 加入首页精选, name: favorite, widget: boolean, default: false}
+      - {label: 封面图, name: cover, widget: image, required: false, hint: "精选卡片和文章顶部用它。不要与正文里的插图重复"}
+      - {label: 封面图说明, name: cover_alt, widget: string, required: false}
+      - {label: 封面图注, name: cover_caption, widget: string, required: false}
+      - {label: 声明（私小说等）, name: disclaimer, widget: string, required: false, hint: "显示在标题下方的一行小字"}
+      - {label: 草稿, name: draft, widget: boolean, default: false, hint: "打开则不会在网站上显示"}
+      - {label: 正文, name: body, widget: markdown, hint: "段落之间会自动空行，不用手动处理"}
+
+  - name: zhaji
+    label: 札记
+    label_singular: 札记
+    description: "短小的片段，几行就停"
+    folder: content/zhaji
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    slug: {template: "{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}", editable: false}
+    sortable_fields: [date]
+    summary: "{{date}}  {{body}}"
+    fields:
+      - {label: 标题, name: title, widget: string, required: false, hint: "可以不写，不显示在札记列表里"}
+      - {label: 时间, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: "HH:mm", format: "YYYY-MM-DDTHH:mm:ssZ"}
+      - {label: 标签, name: tags, widget: list, required: false}
+      - {label: 草稿, name: draft, widget: boolean, default: false}
+      - {label: 正文, name: body, widget: markdown}
+
+  - name: pages
+    label: 站点页面
+    description: "首页简介、关于等"
+    files:
+      - name: home
+        label: 首页简介
+        file: content/_index.md
+        fields:
+          - {label: 站名, name: title, widget: string}
+          - {label: 首页大标题, name: heading, widget: string, required: false, hint: "留空则显示站名"}
+          - {label: 简介正文, name: body, widget: markdown}
+      - name: about
+        label: 关于
+        file: content/about.md
+        fields:
+          - {label: 标题, name: title, widget: string}
+          - {label: 正文, name: body, widget: markdown}
+      - name: links
+        label: 友链
+        file: content/links.md
+        fields:
+          - {label: 标题, name: title, widget: string}
+          - {label: 正文, name: body, widget: markdown}
