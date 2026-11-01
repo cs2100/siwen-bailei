@@ -6,7 +6,7 @@ description: “我只是觉得很抱歉，他们当年欺负你的时候，没�
 tags:
   - 茑萝漫笔
   - 青春
-favorite: false
+favorite: true
 cover: 你好！青春：雾岸与红玫瑰.png
 cover_alt: ''
 cover_caption: ''
