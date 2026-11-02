@@ -9,6 +9,7 @@
 <section class="note-list">
   {{ range .RegularPages.ByDate.Reverse }}
   <article class="note">
+    {{ partial "notetitle.html" . }}
     <div class="note-body">{{ .Content }}</div>
     <a class="note-date" href="{{ .RelPermalink }}">{{ .Date.Format "2006-01-02 15:04" }}</a>
     {{ with .Params.tags }}<span class="note-tags">{{ range . }}#{{ . }} {{ end }}</span>{{ end }}

@@ -56,6 +56,7 @@
   <h2 class="block-title">札记 <a class="more" href="{{ "zhaji/" | relURL }}">更多 →</a></h2>
   {{ range first 2 $notes.ByDate.Reverse }}
   <article class="note">
+    {{ partial "notetitle.html" . }}
     <div class="note-body">{{ .Content }}</div>
     <a class="note-date" href="{{ .RelPermalink }}">{{ .Date.Format "2006-01-02" }}</a>
   </article>

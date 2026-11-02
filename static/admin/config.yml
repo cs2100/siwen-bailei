@@ -292,7 +292,7 @@ collections:
     sortable_fields: [date]
     summary: "{{date}}  {{body}}"
     fields:
-      - {label: 标题, name: title, widget: string, required: false, hint: "可以不写，不显示在札记列表里"}
+      - {label: 标题, name: title, widget: string, required: false, hint: "可以不写。写了会显示在这条札记正文的上方"}
       - {label: 时间, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: "HH:mm", format: "YYYY-MM-DDTHH:mm:ssZ"}
       - {label: 标签, name: tags, widget: list, required: false}
       - {label: 草稿, name: draft, widget: boolean, default: false}

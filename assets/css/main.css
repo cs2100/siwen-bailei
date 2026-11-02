@@ -216,6 +216,7 @@ figcaption { font-family: var(--sans); font-size: .8rem; color: var(--ink-soft);
 
 /* ---------- 札记 ---------- */
 .note { padding: 1rem 1.2rem; margin: 0 0 1rem; background: var(--bg-soft); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; }
+.note-title { margin: 0 0 .5rem; font-size: 1.05rem; font-weight: 700; letter-spacing: .04em; }
 .note-body > :first-child { margin-top: 0; }
 .note-body > :last-child { margin-bottom: 0; }
 .note-body p { margin: 0 0 .9em; }
