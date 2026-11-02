@@ -118,6 +118,167 @@ collections:
       - {label: 草稿, name: draft, widget: boolean, default: false, hint: "打开则不会在网站上显示"}
       - {label: 正文, name: body, widget: markdown, hint: "段落之间会自动空行，不用手动处理"}
 
+  - name: book_xingxing_lanle
+    label: 文库 · 星星蓝了
+    label_singular: 文章
+    description: "《星星蓝了》里的文章"
+    folder: content/wenku/xingxing-lanle
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    slug: {template: "{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}", editable: true}
+    sortable_fields: [lastmod, date, title]
+    summary: "{{title}}"
+    fields:
+      - {label: 标题, name: title, widget: string}
+      - {label: 写作日期, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "文章原本的写作日期；整理旧文时填当年的日期"}
+      - {label: 上传日期, name: lastmod, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "今天的日期；首页“最近”按它排序"}
+      - {label: 本书中的顺序, name: weight, widget: number, value_type: int, min: 1, hint: "数字小的排前面。建议隔十留空：10、20、30，以后插入文章不用重排"}
+      - {label: 一句话摘要, name: description, widget: string, required: false, hint: "显示在目录、精选卡片和分享卡片上，写一行即可"}
+      - {label: 标签, name: tags, widget: list, required: false}
+      - {label: 加入首页精选, name: favorite, widget: boolean, default: false}
+      - {label: 封面图, name: cover, widget: image, required: false, hint: "精选卡片和文章顶部用它。不要与正文里的插图重复"}
+      - {label: 封面图说明, name: cover_alt, widget: string, required: false}
+      - {label: 封面图注, name: cover_caption, widget: string, required: false}
+      - {label: 声明（私小说等）, name: disclaimer, widget: string, required: false, hint: "显示在标题下方的一行小字"}
+      - {label: 草稿, name: draft, widget: boolean, default: false, hint: "打开则不会在网站上显示"}
+      - {label: 正文, name: body, widget: markdown, hint: "段落之间会自动空行，不用手动处理"}
+
+  - name: book_dengxue_zaipiaoshi
+    label: 文库 · 等雪再飘时
+    label_singular: 章节
+    description: "《等雪再飘时》里的章节"
+    folder: content/wenku/dengxue-zaipiaoshi
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    slug: {template: "{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}", editable: true}
+    sortable_fields: [lastmod, date, title]
+    summary: "{{title}}"
+    fields:
+      - {label: 标题, name: title, widget: string}
+      - {label: 写作日期, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "文章原本的写作日期；整理旧文时填当年的日期"}
+      - {label: 上传日期, name: lastmod, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "今天的日期；首页“最近”按它排序"}
+      - {label: 章序, name: weight, widget: number, value_type: int, min: 1, hint: "数字小的排前面。建议隔十留空：10、20、30，以后插入章节不用重排"}
+      - {label: 一句话摘要, name: description, widget: string, required: false, hint: "显示在目录、精选卡片和分享卡片上，写一行即可"}
+      - {label: 标签, name: tags, widget: list, required: false}
+      - {label: 加入首页精选, name: favorite, widget: boolean, default: false}
+      - {label: 封面图, name: cover, widget: image, required: false, hint: "精选卡片和文章顶部用它。不要与正文里的插图重复"}
+      - {label: 封面图说明, name: cover_alt, widget: string, required: false}
+      - {label: 封面图注, name: cover_caption, widget: string, required: false}
+      - {label: 声明（私小说等）, name: disclaimer, widget: string, required: false, hint: "显示在标题下方的一行小字"}
+      - {label: 草稿, name: draft, widget: boolean, default: false, hint: "打开则不会在网站上显示"}
+      - {label: 正文, name: body, widget: markdown, hint: "段落之间会自动空行，不用手动处理"}
+
+  - name: book_zouchu_yulin
+    label: 文库 · 走出雨林
+    label_singular: 章节
+    description: "《走出雨林》里的章节"
+    folder: content/wenku/zouchu-yulin
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    slug: {template: "{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}", editable: true}
+    sortable_fields: [lastmod, date, title]
+    summary: "{{title}}"
+    fields:
+      - {label: 标题, name: title, widget: string}
+      - {label: 写作日期, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "文章原本的写作日期；整理旧文时填当年的日期"}
+      - {label: 上传日期, name: lastmod, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "今天的日期；首页“最近”按它排序"}
+      - {label: 章序, name: weight, widget: number, value_type: int, min: 1, hint: "数字小的排前面。建议隔十留空：10、20、30，以后插入章节不用重排"}
+      - {label: 一句话摘要, name: description, widget: string, required: false, hint: "显示在目录、精选卡片和分享卡片上，写一行即可"}
+      - {label: 标签, name: tags, widget: list, required: false}
+      - {label: 加入首页精选, name: favorite, widget: boolean, default: false}
+      - {label: 封面图, name: cover, widget: image, required: false, hint: "精选卡片和文章顶部用它。不要与正文里的插图重复"}
+      - {label: 封面图说明, name: cover_alt, widget: string, required: false}
+      - {label: 封面图注, name: cover_caption, widget: string, required: false}
+      - {label: 声明（私小说等）, name: disclaimer, widget: string, required: false, hint: "显示在标题下方的一行小字"}
+      - {label: 草稿, name: draft, widget: boolean, default: false, hint: "打开则不会在网站上显示"}
+      - {label: 正文, name: body, widget: markdown, hint: "段落之间会自动空行，不用手动处理"}
+
+  - name: book_hankou_dakongxi
+    label: 文库 · 汉口大空袭
+    label_singular: 章节
+    description: "《汉口大空袭》里的章节"
+    folder: content/wenku/hankou-dakongxi
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    slug: {template: "{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}", editable: true}
+    sortable_fields: [lastmod, date, title]
+    summary: "{{title}}"
+    fields:
+      - {label: 标题, name: title, widget: string}
+      - {label: 写作日期, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "文章原本的写作日期；整理旧文时填当年的日期"}
+      - {label: 上传日期, name: lastmod, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "今天的日期；首页“最近”按它排序"}
+      - {label: 章序, name: weight, widget: number, value_type: int, min: 1, hint: "数字小的排前面。建议隔十留空：10、20、30，以后插入章节不用重排"}
+      - {label: 一句话摘要, name: description, widget: string, required: false, hint: "显示在目录、精选卡片和分享卡片上，写一行即可"}
+      - {label: 标签, name: tags, widget: list, required: false}
+      - {label: 加入首页精选, name: favorite, widget: boolean, default: false}
+      - {label: 封面图, name: cover, widget: image, required: false, hint: "精选卡片和文章顶部用它。不要与正文里的插图重复"}
+      - {label: 封面图说明, name: cover_alt, widget: string, required: false}
+      - {label: 封面图注, name: cover_caption, widget: string, required: false}
+      - {label: 声明（私小说等）, name: disclaimer, widget: string, required: false, hint: "显示在标题下方的一行小字"}
+      - {label: 草稿, name: draft, widget: boolean, default: false, hint: "打开则不会在网站上显示"}
+      - {label: 正文, name: body, widget: markdown, hint: "段落之间会自动空行，不用手动处理"}
+
+  - name: book_haishang_jiumeng
+    label: 文库 · 海上旧梦
+    label_singular: 章节
+    description: "《海上旧梦》里的章节"
+    folder: content/wenku/haishang-jiumeng
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    slug: {template: "{{year}}-{{month}}-{{day}}-{{hour}}{{minute}}", editable: true}
+    sortable_fields: [lastmod, date, title]
+    summary: "{{title}}"
+    fields:
+      - {label: 标题, name: title, widget: string}
+      - {label: 写作日期, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "文章原本的写作日期；整理旧文时填当年的日期"}
+      - {label: 上传日期, name: lastmod, widget: datetime, date_format: "YYYY-MM-DD", time_format: false, format: "YYYY-MM-DD", hint: "今天的日期；首页“最近”按它排序"}
+      - {label: 章序, name: weight, widget: number, value_type: int, min: 1, hint: "数字小的排前面。建议隔十留空：10、20、30，以后插入章节不用重排"}
+      - {label: 一句话摘要, name: description, widget: string, required: false, hint: "显示在目录、精选卡片和分享卡片上，写一行即可"}
+      - {label: 标签, name: tags, widget: list, required: false}
+      - {label: 加入首页精选, name: favorite, widget: boolean, default: false}
+      - {label: 封面图, name: cover, widget: image, required: false, hint: "精选卡片和文章顶部用它。不要与正文里的插图重复"}
+      - {label: 封面图说明, name: cover_alt, widget: string, required: false}
+      - {label: 封面图注, name: cover_caption, widget: string, required: false}
+      - {label: 声明（私小说等）, name: disclaimer, widget: string, required: false, hint: "显示在标题下方的一行小字"}
+      - {label: 草稿, name: draft, widget: boolean, default: false, hint: "打开则不会在网站上显示"}
+      - {label: 正文, name: body, widget: markdown, hint: "段落之间会自动空行，不用手动处理"}
+
+  - name: books
+    label: 文库 · 书目
+    label_singular: 书
+    description: "新增或修改一部书的封面、简介、状态；书里的文章在各自的栏目里写"
+    folder: content/wenku
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/_index"
+    slug: {template: "book-{{year}}{{month}}{{day}}", editable: true}
+    sortable_fields: [weight, title]
+    summary: "{{title}}"
+    fields:
+      - {label: 书名, name: title, widget: string}
+      - {label: 副标题, name: subtitle, widget: string, required: false, hint: "如：随笔集、中短篇小说集、长篇小说"}
+      - {label: 一句话简介, name: description, widget: string, required: false}
+      - {label: 类别, name: form, widget: select, options: ["文集", "长篇", "中篇"], default: "文集", hint: "决定在文库书架上放在哪一组"}
+      - {label: 状态, name: status, widget: select, options: ["整理中", "连载中", "已完结"], default: "整理中"}
+      - {label: 篇章单位, name: unit, widget: select, options: ["篇", "章", "回"], default: "篇", hint: "文集用“篇”，长篇用“章”"}
+      - {label: 目录按顺序号排, name: ordered, widget: boolean, default: true}
+      - {label: 目录前显示一、二、三, name: numbered, widget: boolean, default: false, hint: "长篇建议打开"}
+      - {label: 书架上的顺序, name: weight, widget: number, value_type: int, min: 1, hint: "同一类别里，数字小的排前面"}
+      - {label: 封面, name: cover, widget: image, required: false}
+      - {label: 版式, name: layout, widget: hidden, default: "book"}
+      - {label: 序言, name: body, widget: markdown, required: false, hint: "显示在封面和目录之间，可留空"}
+
   - name: zhaji
     label: 札记
     label_singular: 札记
