@@ -1,12 +1,13 @@
 ---
-title: "走出雨林"
-subtitle: "长篇小说"
-description: ""
-form: "长篇"
-status: "整理中"
-unit: "章"
+title: 走出雨林
+subtitle: 长篇小说
+description: ''
+form: 长篇
+status: 整理中
+unit: 章
 ordered: true
-numbered: true
+numbered: false
 weight: 2
+cover: ''
 layout: book
 ---
