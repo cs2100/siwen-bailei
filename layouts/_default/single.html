@@ -40,6 +40,11 @@
 
   {{ end }}
 
+  {{ if and $isPost (ne .Section "zhaji") (not (in (slice "长篇" "中篇") ($parent.Params.form | default ""))) }}
+    {{ partial "related.html" . }}
+    {{ partial "onthisday.html" . }}
+  {{ end }}
+
   {{ if and $isPost $parent $parent.IsSection }}
     {{ $list := cond ($parent.Params.ordered | default false) $parent.RegularPages.ByWeight $parent.RegularPages.ByDate }}
     {{ partial "pager.html" (dict "page" . "list" $list "unit" ($parent.Params.unit | default "篇")) }}

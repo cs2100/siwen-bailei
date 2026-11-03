@@ -1,0 +1,9 @@
+{{/* 按"月-日"建一份索引（只算一次，供"往年今日"用）：返回 {"11-01": [页面, ...], ...} */}}
+{{ $s := newScratch }}
+{{ range where site.RegularPages "Section" "in" (slice "manbi" "shuhua" "wenku") }}
+  {{ $form := "" }}{{ with .Parent }}{{ $form = .Params.form | default "" }}{{ end }}
+  {{ if not (in (slice "长篇" "中篇") $form) }}
+    {{ $s.Add (.Date.Format "01-02") (slice .) }}
+  {{ end }}
+{{ end }}
+{{ return $s.Values }}

@@ -1,0 +1,17 @@
+{{/* 往年今日：和本篇"月-日"相同、但年份更早的文章（按文章日期算，不是读者打开的那天） */}}
+{{ $p := . }}
+{{ $idx := partialCached "dayindex.html" "idx" }}
+{{ $hits := slice }}
+{{ range (index $idx ($p.Date.Format "01-02")) }}
+  {{ if lt .Date.Year $p.Date.Year }}{{ $hits = $hits | append . }}{{ end }}
+{{ end }}
+{{ if $hits }}
+<section class="more">
+  <h2 class="more-title">往年今日</h2>
+  <ul class="more-list">
+    {{ range sort $hits "Date" "desc" }}
+    <li><span class="yr">{{ .Date.Year }}</span><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}

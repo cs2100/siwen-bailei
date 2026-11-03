@@ -1,0 +1,39 @@
+{{/* 相关文章：先按共同标签推荐（共同标签越多越靠前，同分按日期新的在前），不足 5 篇时用同一栏目/同一本书里的文章补齐。 */}}
+{{ $p := . }}
+{{ $want := 5 }}
+{{ $myTags := $p.Params.tags | default slice }}
+{{ $scored := slice }}
+{{ range where site.RegularPages "Section" "in" (slice "manbi" "shuhua" "wenku") }}
+  {{ $form := "" }}{{ with .Parent }}{{ $form = .Params.form | default "" }}{{ end }}
+  {{ if and (ne .Permalink $p.Permalink) (not (in (slice "长篇" "中篇") $form)) }}
+    {{ $n := len (intersect ($myTags) (.Params.tags | default slice)) }}
+    {{ if gt $n 0 }}
+      {{ $key := add (mul $n 10000000000) (add .Date.Unix 2000000000) }}
+      {{ $scored = $scored | append (dict "p" . "k" $key) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $list := slice }}
+{{ $seen := dict $p.Permalink true }}
+{{ range first $want (sort $scored "k" "desc") }}
+  {{ $list = $list | append .p }}{{ $seen = merge $seen (dict .p.Permalink true) }}
+{{ end }}
+{{ if lt (len $list) $want }}
+  {{ with $p.CurrentSection }}
+    {{ range .RegularPages.ByDate.Reverse }}
+      {{ if and (lt (len $list) $want) (not (index $seen .Permalink)) }}
+        {{ $list = $list | append . }}{{ $seen = merge $seen (dict .Permalink true) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if $list }}
+<section class="more">
+  <h2 class="more-title">相关文章</h2>
+  <ul class="more-list">
+    {{ range $list }}
+    <li><span class="yr">{{ .Date.Year }}</span><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+    {{ end }}
+  </ul>
+</section>
+{{ end }}
