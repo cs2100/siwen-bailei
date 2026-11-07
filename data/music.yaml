@@ -1,0 +1,7 @@
+# 播放列表：file 是放在 static/music/ 里的音频文件名
+- title: 示例曲 · 晨
+  artist: 试听用合成音
+  file: demo-1.mp3
+- title: 示例曲 · 暮
+  artist: 试听用合成音
+  file: demo-2.mp3

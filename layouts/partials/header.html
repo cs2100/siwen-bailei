@@ -1,7 +1,7 @@
 <header class="site-header">
   <div class="wrap header-in">
     <a class="brand" href="{{ site.Home.RelPermalink }}" aria-label="{{ site.Title }}">
-      <span class="seal" aria-hidden="true">败</span>
+      <span class="seal" aria-hidden="true">思</span>
       <span class="brand-name">{{ site.Title }}</span>
     </a>
     <nav class="nav" aria-label="主导航">
@@ -10,7 +10,9 @@
         <a href="{{ .URL }}"{{ if or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }} aria-current="page"{{ end }}>{{ .Name }}</a>
       {{ end }}
       {{ if ne site.Params.traditional false }}<button class="lang-toggle ignore-opencc" type="button" title="切换为繁体（正體）" aria-label="切换为繁体（正體）" data-src="{{ "js/opencc-cn2t.js" | relURL }}" data-variant="{{ site.Params.traditionalVariant | default "tw" }}">繁</button>{{ end }}
+      {{ if site.Data.music }}<button class="music-toggle ignore-opencc" type="button" aria-label="音乐" title="音乐" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke-width="1.8"/><circle cx="12" cy="12" r="7" stroke-width="1" stroke-dasharray="11 6 4 5 9 9" opacity=".6"/><circle cx="12" cy="12" r="4.6" stroke-width=".9" stroke-dasharray="7 5 10 7" opacity=".5"/><circle cx="12" cy="12" r="3" fill="#a8402c" stroke="none"/><circle cx="14.2" cy="11" r=".7" fill="#fff7ee" stroke="none"/><circle cx="12" cy="12" r=".7" fill="#fff7ee" stroke="none"/></svg></button>{{ end }}
       <button class="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg></button>
     </nav>
   </div>
 </header>
+{{ partial "player.html" . }}

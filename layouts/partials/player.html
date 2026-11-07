@@ -1,0 +1,16 @@
+{{ with site.Data.music }}
+{{ $c := resources.Get "css/player.css" | resources.Minify | resources.Fingerprint }}<link rel="stylesheet" href="{{ $c.RelPermalink }}">
+<div class="player" id="player" hidden>
+  <div class="pl-now"><span class="pl-title">—</span><span class="pl-artist"></span></div>
+  <div class="pl-ctl">
+    <button type="button" data-a="prev" aria-label="上一首">⏮</button>
+    <button type="button" data-a="play" class="pl-play" aria-label="播放/暂停">▶</button>
+    <button type="button" data-a="next" aria-label="下一首">⏭</button>
+  </div>
+  <input class="pl-seek" type="range" min="0" max="1000" value="0" aria-label="进度">
+  <ul class="pl-list">
+    {{ range $i, $t := . }}<li><button type="button" data-i="{{ $i }}" data-src="{{ printf "music/%s" $t.file | relURL }}" data-title="{{ $t.title }}" data-artist="{{ $t.artist }}">{{ $t.title }}</button></li>{{ end }}
+  </ul>
+  <audio preload="none"></audio>
+</div>
+{{ end }}

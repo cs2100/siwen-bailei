@@ -11,5 +11,6 @@
   {{ partial "footer.html" . }}
   {{ $js := resources.Get "js/main.js" | resources.Minify | resources.Fingerprint }}
   <script src="{{ $js.RelPermalink }}" defer></script>
+  {{ if site.Data.music }}{{ $pl := resources.Get "js/player.js" | resources.Minify | resources.Fingerprint }}<script src="{{ $pl.RelPermalink }}" defer></script>{{ end }}
 </body>
 </html>
