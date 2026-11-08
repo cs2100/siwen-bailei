@@ -1,0 +1,10 @@
+/* 页头字标：浅色、深色各一张，随主题切换 */
+.brand-logo{height:50px;width:auto;display:block}
+.brand-dark{display:none}
+@media (max-width:600px){.brand-logo{height:44px}}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .brand-light{display:none}
+  :root:not([data-theme="light"]) .brand-dark{display:block}
+}
+:root[data-theme="dark"] .brand-light{display:none}
+:root[data-theme="dark"] .brand-dark{display:block}

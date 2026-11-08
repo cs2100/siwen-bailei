@@ -18,7 +18,8 @@
 {{- end }}
 <meta name="theme-color" content="#f6f1e7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#1b1917" media="(prefers-color-scheme: dark)">
-<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="any">
+<link rel="icon" href="{{ "favicon-32.png" | relURL }}" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
 <link rel="manifest" href="{{ "site.webmanifest" | relURL }}">
 <meta name="apple-mobile-web-app-title" content="思文败类">
@@ -33,3 +34,4 @@
 </script>
 {{ $css := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{ $brand := resources.Get "css/brand.css" | resources.Minify | resources.Fingerprint }}<link rel="stylesheet" href="{{ $brand.RelPermalink }}">
