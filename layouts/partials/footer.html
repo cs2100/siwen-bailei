@@ -4,6 +4,6 @@
       {{ range site.Menus.footer }}<a href="{{ .URL }}">{{ .Name }}</a>{{ end }}
       {{ with site.Params.email }}<a href="mailto:{{ . }}">写信给我</a>{{ end }}
     </nav>
-    <p class="copy">© {{ site.Params.since }}{{ if ne (now.Year) site.Params.since }}–{{ now.Year }}{{ end }} {{ site.Title }}</p>
+    <p class="copy">© {{ site.Params.since }}{{ if ne (now.Year) site.Params.since }}–{{ now.Year }}{{ end }} 陈玄</p>
   </div>
 </footer>
